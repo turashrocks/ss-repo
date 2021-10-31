@@ -1,7 +1,7 @@
 <template>
   <li class="d-table w-100">
     <div class="stats-txt d-table-cell w-50">
-      <a href="#" @click.prevent="likeDesign()" v-if="$auth.loggedIn">
+      <a href="#" @click.prevent="likeMovie()" v-if="$auth.loggedIn">
         <template v-if="current_user_likes">
           <span>
             <i class="fas fa-thumbs-down fa-2x text-danger"></i>
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  props: ['design'],
+  props: ['movie'],
 
   data() {
     return {
@@ -34,15 +34,15 @@ export default {
   },
 
   methods: {
-    likeDesign() {
-      this.$axios.post(`/designs/${this.design.id}/like`).then(res => {
+    likeMovie() {
+      this.$axios.post(`/movies/${this.movie.id}/like`).then(res => {
         this.current_user_likes = !this.current_user_likes;
         this.total_likes = res.data.total;
       });
     },
     checkIfCurrentUserLikes() {
       this.$axios
-        .$get(`/designs/${this.design.id}/liked`)
+        .$get(`/movies/${this.movie.id}/liked`)
         .then(res => (this.current_user_likes = response.liked));
     }
   },

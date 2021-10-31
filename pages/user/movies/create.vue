@@ -1,10 +1,11 @@
 <template>
   <div>
-    <section class="hero text-center bg-secondary text-white">
+    <section class="hero text-center bg-secondary">
       <div class="container">
         <h1 class="font-28 fw-600 text-uppercase">
-          Upload a design
+          Upload a movie poster
         </h1>
+        <p> of 800px x 600px size</p>
       </div>
     </section>
 
@@ -66,10 +67,10 @@ export default {
     slimService(formdata, progress, success, failure, slim) {
       this.uploading = true;
       this.$axios
-        .post('/designs', formdata)
+        .post('/movies', formdata)
         .then(res => {
           this.$router.push({
-            name: 'designs.edit',
+            name: 'movies.edit',
             params: { id: res.data.id }
           });
         })

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Start Filters -->
-    <section class="filters-block shadow-sm">
+    <section class="filters-block">
       <div class="container">
         <form @submit.prevent="search">
           <div class="filters d-flex justify-content-between align-items-center">
@@ -36,12 +36,12 @@
                 <input
                   type="checkbox"
                   class="custom-control-input"
-                  id="hasTeam"
+                  id="hasStudio"
                   true-value="1"
                   false-value="0"
-                  v-model="filters.has_team"
+                  v-model="filters.has_studio"
                 />
-                <label class="custom-control-label" for="hasTeam">By Team</label>
+                <label class="custom-control-label" for="hasStudio">By Studio</label>
               </div>
               <div>
                 <div class="input-group mb-0">
@@ -54,7 +54,7 @@
                   <div class="input-group-append">
                     <button
                       :disabled="searching"
-                      class="btn rounded primary-bg-color text-white"
+                      class="btn rounded primary-bg-color"
                       type="submit"
                     >
                       <span v-show="searching">
@@ -75,7 +75,7 @@
     <section class="cards-block">
       <div class="container">
         <div class="row">
-          <base-design v-for="design in designs" :key="design.id" :design="design"></base-design>
+          <base-movie v-for="movie in movies" :key="movie.id" :movie="movie"></base-movie>
         </div>
       </div>
     </section>
@@ -86,10 +86,10 @@
 export default {
   data() {
     return {
-      designs: [],
+      movies: [],
       searching: false,
       filters: {
-        has_team: 0,
+        has_studio: 0,
         has_comments: 0,
         q: '',
         orderBy: 'likes'
@@ -108,8 +108,8 @@ export default {
     search() {
       this.searching = true;
       this.$axios
-        .$get(`/search/designs?${this.queryString}`)
-        .then(res => (this.designs = res.data))
+        .$get(`/search/movies?${this.queryString}`)
+        .then(res => (this.movies = res.data))
         .catch(e => console.log(e))
         .finally(() => (this.searching = false));
     }

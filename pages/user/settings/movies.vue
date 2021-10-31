@@ -1,6 +1,6 @@
 <template>
   <div class="setting-block">
-    <div class="setting-title font-16 fw-500">Designs</div>
+    <div class="setting-title font-16 fw-500">Movies</div>
 
     <div class="setting-body white-bg-color">
       <table class="table table-striped">
@@ -13,17 +13,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="design in designs" :key="design.id">
+          <tr v-for="movie in movies" :key="movie.id">
             <td>
-              <div v-if="design.images">
-                <img :src="design.images.thumbnail" width="100" />
+              <div v-if="movie.images">
+                <img :src="movie.images.thumbnail" width="100" />
               </div>
             </td>
-            <td>{{ design.title }}</td>
-            <td>{{ design.is_live ? 'Published' : 'Draft' }}</td>
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.is_live ? 'Published' : 'Draft' }}</td>
             <td>
               <nuxt-link
-                :to="{ name: 'designs.edit', params: { id: design.id } }"
+                :to="{ name: 'movies.edit', params: { id: movie.id } }"
               >
                 Edit
               </nuxt-link>
@@ -40,21 +40,21 @@ export default {
   middleware: ['auth'],
   data() {
     return {
-      designs: []
+      movies: []
     };
   },
 
   methods: {
-    async fetchUserDesigns() {
+    async fetchUserMovies() {
       const { data } = await this.$axios.$get(
-        `/users/${this.$auth.user.id}/designs`
+        `/users/${this.$auth.user.id}/movies`
       );
-      this.designs = data;
+      this.movies = data;
     }
   },
 
   created() {
-    this.fetchUserDesigns();
+    this.fetchUserMovies();
   }
 };
 </script>
