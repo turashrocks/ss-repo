@@ -2,9 +2,21 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,100i,300,300i,400,600,600i,700&display=swap');
 @import 'imports/style';
 
+
+// app transitions
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+
 /***** CUSTOM CSS **********/
 .list-group-item.router-link-active {
-  color: #fff !important;
+  color: var(--color-secondary);
   background-color: #37a9ff !important;
   border-color: #37a9ff !important;
 }

@@ -1,7 +1,7 @@
 <template>
   <header class="fixed-topx">
     <nav class="navbar navbar-expand-lg navbar-dark align-items-center">
-      <a href="/" class="navbar-brand text-uppercase fw-500">DesignHouse</a>
+      <nuxt-link to="/" class="navbar-brand text-uppercase fw-500">MovieHouse</nuxt-link>
       <button
         class="navbar-toggler mr-auto"
         type="button"
@@ -16,45 +16,37 @@
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav font-14 fw-300">
           <li class="nav-item">
-            <a href="/designs" class="nav-link">Designs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" title="Designers">Designers</a>
+            <nuxt-link class="nav-link" to="/remote-movies" title="Remote">Remote</nuxt-link>
           </li>
         </ul>
-        <div class="header-search">
-          <form action method>
-            <div class="form-group">
-              <input
-                type="text"
-                autocomplete="OFF"
-                name="search"
-                class="form-control text-white font-14 fw-300"
-                placeholder="Search and hit enter..."
-              />
-              <div class="search-icon text-white">
-                <i class="fas fa-search"></i>
-              </div>
-            </div>
-          </form>
+        <div class="upload-shot white-path font-14 text-uppercase">
+          <nuxt-link to="/upload" class="primary-bg-color">
+            Upload
+          </nuxt-link>
         </div>
-        <div class="upload-shot white-path font-14 fw-500 text-uppercase mr-auto">
-          <a href="/upload" class="primary-bg-color text-white">
-            <i class="fas fa-cloud-upload-alt"></i> Upload
-          </a>
+        <template v-if="!$auth.loggedIn">
+        <div class="upload-shot white-path font-14 text-uppercase">
+          <nuxt-link to="/register" class="primary-bg-color">
+            Register
+          </nuxt-link>
         </div>
+        <div class="upload-shot white-path font-14 text-uppercase" style="margin-right: 30px;">
+          <nuxt-link to="/login" class="primary-bg-color">
+            Login
+          </nuxt-link>
+        </div>
+        </template>
       </div>
-
       <!-- Before Login -->
       <template v-if="!$auth.loggedIn">
-        <ul class="before-login font-14 fw-300 text-uppercase">
+        <!-- <ul class="before-login font-14 fw-300 text-uppercase">
           <li>
-            <a href="/register">Sign Up</a>
+            <nuxt-link to="/register">Sign Up</nuxt-link>
           </li>
           <li>
-            <a href="/login">Login</a>
+            <nuxt-link to="/login">Login</nuxt-link>
           </li>
-        </ul>
+        </ul> -->
       </template>
       <!-- End Before Login -->
 
@@ -63,9 +55,9 @@
         <ul class="author-page white-path">
           <!-- Profile Dropdown -->
           <li class="dropdown">
-            <a
-              href="#"
-              class="dropdown-toggle text-white"
+            <nuxt-link
+              to="#"
+              class="dropdown-toggle"
               id="userDropdown"
               role="button"
               data-toggle="dropdown"
@@ -88,40 +80,35 @@
                   <i class="fa fa-angle-down"></i>
                 </span>
               </div>
-            </a>
+            </nuxt-link>
             <div class="dropdown-menu user-dropdown font-14 fw-500" aria-labelledby="userDropdown">
-              <div class="dropdown-title-group font-12 fw-500">
-                <span class="dropdown-title text-uppercase">Your Account</span>
-              </div>
-              <nuxt-link to="/settings/dashboard" class="dropdown-item mt-28">
-                <i class="fas fa-tachometer-alt"></i>
-                Dashboard
-              </nuxt-link>
-              <a class="dropdown-item" href="#" title="Profile">
+              <nuxt-link class="dropdown-item" to="/settings/movies" title="Profile">
                 <i class="fa fa-user"></i>
-                Profile
-              </a>
-              <a class="dropdown-item" href="#" title="Setting">
-                <i class="fa fa-cogs"></i>
-                Setting
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" @click.prevent="logout">
+                Edit Movies
+              </nuxt-link>
+              <div class="dropdown-item" @click.prevent="logout">
                 <i class="fa fa-lock"></i>
                 Sign Out
-              </a>
+              </div>
             </div>
           </li>
           <!-- End Profile Dropdown -->
         </ul>
       </template>
       <!-- End After Login -->
+
+      <ColorModePicker />
     </nav>
   </header>
 </template>
 
 <script>
+import ColorModePicker from '@/components/ColorModePicker.vue'
+
 export default {
+  components:{
+    ColorModePicker
+  },
   methods: {
     logout() {
       this.$auth.logout();

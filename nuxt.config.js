@@ -1,11 +1,16 @@
 require('dotenv').config();
 export default {
   mode: 'universal',
+  svg: {
+    vueSvgLoader: {
+        // vue-svg-loader options
+    },
+  },
   /*
    ** Headers of the page
    */
   head: {
-    title: 'DesignHouse',
+    title: 'MovieHouse',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -31,23 +36,28 @@ export default {
       }
     ]
   },
-
+  components: true,
   loading: { color: '#fff' },
-  css: ['@/assets/scss/main.scss'],
+  css: [
+    '@/assets/css/style.css',
+    '@/assets/scss/main.scss'
+  ],
 
   plugins: [
     '~plugins/vform',
-    '~components/_global',
-    { src: '~/plugins/gmaps', ssr: false }
+    '~components/_global'
   ],
-
-  buildModules: ['@nuxtjs/router'],
+  buildModules: [
+    '@nuxtjs/router',
+    '@nuxtjs/color-mode'
+  ],
 
   modules: [
     'bootstrap-vue/nuxt',
     '@nuxtjs/auth',
     '@nuxtjs/axios',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    "@nuxtjs/svg"
   ],
 
   auth: {

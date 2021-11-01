@@ -16,10 +16,6 @@
             </div>
 
             <div class="form-group">
-              <base-gmap :initialValue="form.formatted_address" @address-response="handleAddress"></base-gmap>
-            </div>
-
-            <div class="form-group">
               <base-textarea
                 :form="form"
                 field="about"
@@ -27,20 +23,6 @@
                 v-model="form.about"
                 placeholder="Please enter some information about yourself"
               ></base-textarea>
-            </div>
-
-            <div class="form-group custom-control custom-checkbox">
-              <input
-                type="checkbox"
-                class="custom-control-input"
-                id="available_to_hire"
-                v-model="form.available_to_hire"
-              />
-              <label
-                class="custom-control-label"
-                :value="true"
-                for="available_to_hire"
-              >Available to hire?</label>
             </div>
 
             <div class="text-right">
@@ -60,10 +42,7 @@ export default {
       form: this.$vform({
         name: '',
         about: '',
-        tagline: '',
-        formatted_address: '',
-        location: {},
-        available_to_hire: false
+        tagline: ''
       })
     };
   },
@@ -74,13 +53,6 @@ export default {
         .then(res => console.log(res))
         .catch(e => console.log(e));
     },
-    handleAddress(data) {
-      this.form.formatted_address = data.formatted_address;
-      this.form.location = {
-        latitude: data.latitude,
-        longitude: data.longitude
-      };
-    }
   },
 
   mounted() {

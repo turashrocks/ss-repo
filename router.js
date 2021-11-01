@@ -5,7 +5,12 @@ Vue.use(Router);
 const page = path => () => import(`~/pages/${path}`).then(m => m.default || m);
 
 const routes = [
-  { path: '/', name: 'index', component: page('index.vue') },
+  // { path: '/', name: 'index', component: page('index.vue') },
+  {
+    path: '/',
+    name: 'movies.search',
+    component: page('movies/search.vue')
+  },
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
   {
@@ -31,13 +36,13 @@ const routes = [
 
   {
     path: '/upload',
-    name: 'designs.upload',
-    component: page('user/designs/create.vue')
+    name: 'movies.upload',
+    component: page('user/movies/create.vue')
   },
   {
-    path: '/designs/:id/edit',
-    name: 'designs.edit',
-    component: page('user/designs/edit.vue')
+    path: '/movies/:id/edit',
+    name: 'movies.edit',
+    component: page('user/movies/edit.vue')
   },
 
   {
@@ -46,32 +51,32 @@ const routes = [
     children: [
       { path: '', redirect: { name: 'settings.dashboard' } },
       {
-        path: 'dashboard',
-        name: 'settings.dashboard',
-        component: page('user/settings/dashboard.vue')
-      },
-      {
-        path: 'profile',
-        name: 'settings.profile',
-        component: page('user/settings/profile.vue')
-      },
-      {
-        path: 'designs',
-        name: 'settings.designs',
-        component: page('user/settings/designs.vue')
+        path: 'movies',
+        name: 'settings.movies',
+        component: page('user/settings/movies.vue')
       }
     ]
   },
 
   {
-    path: '/designs',
-    name: 'designs.search',
-    component: page('designs/search.vue')
+    path: '/movies',
+    name: 'movies.search',
+    component: page('movies/search.vue')
   },
   {
-    path: '/design/:slug',
-    name: 'designs.show',
-    component: page('designs/show.vue')
+    path: '/movie/:slug',
+    name: 'movies.show',
+    component: page('movies/show.vue')
+  },
+  {
+    path: '/remote-movies',
+    name: 'remote-movies',
+    component: page('remote-movies/index.vue')
+  },
+  {
+    path: '/remote-movies/:id/',
+    name: 'remotemovieid',
+    component: page('remote-movies/sub/_remotemovieid.vue')
   }
 ];
 

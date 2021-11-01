@@ -11,7 +11,7 @@
                     </div>
                     <div class="col-md-4 text-center">
                         <p class="font-14 fw-300">
-                            © 2018 Project. All rights reserved.
+                            © 2021 Project. All rights reserved.
                         </p>
                     </div>
                     <div class="col-md-4 text-right">
